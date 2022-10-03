@@ -5,6 +5,7 @@ var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
+let randomY;
 
 export function preload ()
 {
@@ -33,9 +34,8 @@ export function create ()
 
     //  Now let's create some ledges
     platforms.create(600, 400, 'ground');
-    // platforms.create(50, 400, 'ground');
     platforms.create(40, 200, 'ground');
-    platforms.create(750, 220, 'ground');
+    platforms.create(750, 230, 'ground');
 
     // The player and its settings
     player = this.physics.add.sprite(100, 450, 'obi');
@@ -68,10 +68,18 @@ export function create ()
     //  Input Events
     cursors = this.input.keyboard.createCursorKeys();
 
+    randomY = Math.random();
+    if (randomY > 0.33) {
+        randomY = 450;
+    } else if (randomY < 0.33) {
+        randomY = 215;
+    } else {
+        randomY = 180;
+    }
     treats = this.physics.add.group();
     treats.create(
         Math.floor(Math.random() * 800),
-        Math.floor(Math.random() * 600),
+        randomY,
         'treato')
 
     treats.children.iterate(function (child) {
@@ -131,9 +139,17 @@ export function collectTreat (player, treat) {
     scoreText.setText('Score: ' + score);
 
     if (treats.countActive(true) === 0) {
+        randomY = Math.random();
+        if (randomY > 0.33) {
+            randomY = 450;
+        } else if (randomY < 0.33) {
+            randomY = 215;
+        } else {
+            randomY = 180;
+        }
         treats.create(
             Math.floor(Math.random() * 800),
-            Math.floor(Math.random() * 600),
+            randomY,
             'treato');
     }
 }
