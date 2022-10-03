@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
@@ -36,9 +35,6 @@ module.exports = {
       CANVAS_RENDERER: JSON.stringify(true),
       WEBGL_RENDERER: JSON.stringify(true)
     }),
-    new HtmlWebpackPlugin({
-      template: "./index.html"
-    })
   ],
   performance: {
     maxEntrypointSize: 9000000,
